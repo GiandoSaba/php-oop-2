@@ -1,21 +1,21 @@
 <?php
 
-require_once __DIR__ . "/class/Product.php";
-require_once __DIR__ . "/class/User.php";
-require_once __DIR__ . "/class/CreditCard.php";
+require_once __DIR__ . '/classes/Product.php';
+require_once __DIR__ . '/classes/Phone.php';
+require_once __DIR__ . '/classes/Laptop.php';
+require_once __DIR__ . '/classes/User.php';
+require_once __DIR__ . '/classes/CreditCard.php';
 
-$buyer = new User("Giando", "Sabato");
+$user = new User('Giando', 'Sabato', 'giandosaba@mail.it', '850274');
+$creditCard = new CreditCard('Giando Sabato', '1234-4567-8945-1234', '08/23', 518);
 
-$products = [];
-$productOne = new Product("book", 9);
-$productTwo = new Product("dvd", 18);
+$phone = new Phone(1, 'iphoneX', 1000);
+var_dump($phone);
 
-$buyer->setCart([$productOne]);
+try {
+    $user->setPaymentMethod($creditCard);
+} catch (TypeError $error) {
+    echo $error->getMessage();
+}
 
-$buyer->setCreditCard(new CreditCard("1234-4567-8901-2345", "05/23"));
-
-$buyer->setTotalCart();
-
-$buyer->buyItemsCart();
-
-var_dump($buyer);
+var_dump($user->getPaymentMethod());
